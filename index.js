@@ -4,8 +4,8 @@ var rp = require('request-promise');
 exports.handler = (event, context, callback) => {    
 
     var options = {
-    uri: 'https://httpbin.org/ip',
-    method: 'POST',
+    uri: 'https://sodev.anzen.com.mx',
+    method: 'GET',
     body: {
 
     },
