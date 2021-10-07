@@ -1,47 +1,25 @@
 'use strict';
+console.log('Loading function');
+var rp = require('request-promise');
+exports.handler = (event, context, callback) => {    
 
-const async = require('async');
-const https = require('https');
+    var options = {
+    uri: 'https://httpbin.org/ip',
+    method: 'POST',
+    body: {
 
-module.exports.handler = function (event, context, callback) {
+    },
+    json: true 
+};
 
-    let body = "";
-    let countChunks = 0;
 
-    async.waterfall([
-        requestDataFromFeed,
-        // processBody,
-    ], (err, result) => {
-        if (err) {
+    rp(options).then(function (parsedBody) {
+            console.log(parsedBody);
+        })
+        .catch(function (err) {
+            // POST failed... 
             console.log(err);
-            callback(err);
-        }
-        else {
-            const message = "Success";
-            console.log(result.body);
-            callback(null, message);
-        }
-    });
-
-    function requestDataFromFeed(callback) {
-        const url = 'https://jsonplaceholder.typicode.com/todos';
-        console.log('Sending GET request to ${url}');
-        https.get(url, (response) => {
-            console.log('statusCode:', response.statusCode);
-            response.on('data', (chunk) => {
-                countChunks++;
-                body += chunk;
-            });
-            response.on('end', () => {
-                const result = {
-                    countChunks: countChunks,
-                    body: body
-                };
-                callback(null, result);
-            });
-        }).on('error', (err) => {
-            console.log(err);
-            callback(err);
         });
-    }
+
+    context.done(null);
 };
