@@ -12,8 +12,8 @@ exports.handler = async (event) => {
 function httprequest() {
      return new Promise((resolve, reject) => {
         const options = {
-            host: 'https://sodev.anzen.com.mx',
-            path: '/',
+            host: 'jsonplaceholder.typicode.com',
+            path: '/todos',
             port: 443,
             method: 'GET'
         };
