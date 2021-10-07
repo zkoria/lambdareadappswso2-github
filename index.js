@@ -20,6 +20,9 @@ function httprequest() {
 
         console.log('2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
         const req = http.request(options, (res) => {
+
+        console.log('res.statusCode: ', res.statusCode)
+
           if (res.statusCode < 200 || res.statusCode >= 300) {
                 return reject(new Error('statusCode=' + res.statusCode));
             }
