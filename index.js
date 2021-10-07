@@ -24,7 +24,7 @@ module.exports.handler = function (event, context, callback) {
     });
 
     function requestDataFromFeed(callback) {
-        const url = 'jsonplaceholder.typicode.com/todos';
+        const url = 'https://jsonplaceholder.typicode.com/todos';
         console.log(`Sending GET request to ${url}`);
         https.get(url, (response) => {
             console.log('statusCode:', response.statusCode);
