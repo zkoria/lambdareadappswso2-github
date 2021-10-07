@@ -1,32 +1,16 @@
 
-'use strict';
-
-var AWSXRay = require('aws-xray-sdk-core')
-var captureMySQL = require('aws-xray-sdk-mysql')
-var mysql = captureMySQL(require('mysql2'))
-const username = 'admin'
-const password = 'Schito98'
-const host = 'database-metlife.cmutd1p8nozi.us-east-2.rds.amazonaws.com'
-
-
-// To allow Cross-origin resource sharing
-const headers = {
-    'Access-Control-Allow-Origin': '*',
-};
-
-
-
 const https = require('https')
-let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
-//let url = "https://sodev.anzen.com.mx"
+let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"   
 
-exports.handler =  function(event, context, callback) {
- console.log('event resource: ', event.resource)
-  https.get(url, (res) => {
-    callback(null, res.statusCode)
-  }).on('error', (e) => {
-    callback(Error(e))
-  })
+exports.handler = async function(event) {
+  console.log('event resource: ', event.resource)
+  const promise = new Promise(function(resolve, reject) {
+    https.get(url, (res) => {
+        resolve(res.statusCode)
+      }).on('error', (e) => {
+        reject(Error(e))
+      })
+    })
+  return promise
 }
-
 
