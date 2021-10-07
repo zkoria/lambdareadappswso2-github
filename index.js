@@ -1,16 +1,15 @@
 
-const https = require('https')
-let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"   
+var http = require('http');
 
-exports.handler = async function(event) {
-  console.log('event resource: ', event.resource)
-  const promise = new Promise(function(resolve, reject) {
-    https.get(url, (res) => {
-        resolve(res.statusCode)
-      }).on('error', (e) => {
-        reject(Error(e))
-      })
-    })
-  return promise
+exports.handler = function(event, context) {
+  console.log('start request to ' + event.url)
+  http.get(event.url, function(res) {
+    console.log("Got response: " + res.statusCode);
+    context.succeed();
+  }).on('error', function(e) {
+    console.log("Got error: " + e.message);
+    context.done(null, 'FAILURE');
+  });
+
+  console.log('end request to ' + event.url);
 }
-
