@@ -1,6 +1,6 @@
 const http = require('https')
 exports.handler = async (event) => {
-    console.log('event.url')
+    console.log('event.url: ', event.url)
     return httprequest().then((data) => {
         const response = {
             statusCode: 200,
@@ -13,8 +13,8 @@ function httprequest() {
      return new Promise((resolve, reject) => {
         const options = {
             host: 'https://sodev.anzen.com.mx',
-            path: '/getapps',
-            port: 8237,
+            path: '/',
+            port: 443,
             method: 'GET'
         };
         const req = http.request(options, (res) => {
