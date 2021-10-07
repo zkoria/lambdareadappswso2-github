@@ -17,7 +17,7 @@ const headers = {
 
 
 const https = require('https')
-let url = "https://sodev.anzen.com.mx:8237"
+let url = "https://sodev.anzen.com.mx"
 
 exports.handler =  function(event, context, callback) {
   https.get(url, (res) => {
