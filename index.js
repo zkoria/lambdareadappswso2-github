@@ -21,5 +21,6 @@ exports.handler = (event, context, callback) => {
             console.log(err);
         });
 
+    console.log('parsedBody: ', parsedBody)
     context.done(null);
 };
