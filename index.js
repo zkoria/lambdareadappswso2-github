@@ -1,6 +1,6 @@
 const http = require('https')
 exports.handler = async (event) => {
-    console.log('event.url: ', event.url)
+    console.log('1 event.url: ', event.url)
     return httprequest().then((data) => {
         const response = {
             statusCode: 200,
@@ -17,10 +17,14 @@ function httprequest() {
             port: 443,
             method: 'GET'
         };
+
+        console.log('2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
         const req = http.request(options, (res) => {
           if (res.statusCode < 200 || res.statusCode >= 300) {
                 return reject(new Error('statusCode=' + res.statusCode));
             }
+
+        console.log('3 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
             var body = [];
             res.on('data', function(chunk) {
                 body.push(chunk);
