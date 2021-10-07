@@ -21,6 +21,7 @@ let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
 //let url = "https://sodev.anzen.com.mx"
 
 exports.handler =  function(event, context, callback) {
+ console.log('event resource: ', event.resource)
   https.get(url, (res) => {
     callback(null, res.statusCode)
   }).on('error', (e) => {
