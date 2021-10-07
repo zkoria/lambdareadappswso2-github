@@ -1,25 +1,35 @@
-'use strict';
-console.log('Loading function');
-var rp = require('request-promise');
-exports.handler = (event, context, callback) => {    
 
-    var options = {
-    uri: 'https://sodev.anzen.com.mx',
-    method: 'GET',
-    body: {
+const https = require('https')
 
-    },
-    json: true 
+const options =  {
+hostname : 'https://sodev.anzen.com.mx',
+port: 8237 ,
+path: '/',
+method: 'GET'
 };
 
+exports.handler = async (event) => {
 
-    rp(options).then(function (parsedBody) {
-            console.log(parsedBody);
-        })
-        .catch(function (err) {
-            // POST failed... 
-            console.log(err);
-        });
+  const req = https.request(options, res => {
+  console.log(`statusCode: ${res.statusCode}`)
 
-    context.done(null);
-};
+  var reponse;
+
+  res.on('data', d => {
+    //process.stdout.write(d)
+    response+=d;
+  })
+    console.log('response: ', response)
+})
+
+req.on('error', error => {
+  console.error(error)
+})
+
+req.end()
+
+}
+
+
+
+
