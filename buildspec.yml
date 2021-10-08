@@ -6,14 +6,14 @@ phases:
     commands:
       - echo "Installing dependencies..."
       #- npm install --save request request-promise
-      - npm install 
-      - mv node_modules lib 
+      #- npm install 
+      #- mv node_modules lib 
   build:
     commands:
       - echo "Zipping deployment package..."
-      - cd lib
+      #- cd lib
       - zip -r9 ../deployment_package.zip .
-      - cd ..
+      #- cd ..
       - zip -g deployment_package.zip index.js
   post_build:
     commands:
