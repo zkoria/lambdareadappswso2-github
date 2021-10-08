@@ -6,7 +6,7 @@ phases:
     commands:
       - echo "Installing dependencies..."
       ##- npm install --save request request-promise
-      #- npm install 
+      ##- npm install 
       #- mv node_modules lib 
   build:
     commands:
