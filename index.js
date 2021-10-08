@@ -8,36 +8,29 @@ path: '/',
 method: 'GET'
 };
 
-//exports.handler = async (event) => {
 const doRequest = () => new Promise((resolve, reject) => {
-
-  const req = https.request(options, res => {
-  console.log(`statusCode: ${res.statusCode}`)
-
-  var reponse;
-
-  res.on('data', d => {
-    //process.stdout.write(d)
-    response+=d;
-  })
-
-        res.on('end', function () {
-            resolve(result);
+    const https = require('https');
+    const options = {
+        hostname: 'sodev.anzen.com.mx',
+        port: 8237,
+        path: '/getapps',
+        method: 'GET'
+    }
+    const req = https.request(options, res => {
+        var r = '';
+        res.on('data', (d) => {
+            r += d;
         });
- 
-
-
-   // console.log('response: ', response)
+        res.on('end', function () {
+            resolve(JSON.parse(r))
+        });
+    })
+    req.on('error', (e) => {
+        reject(e.message)
+    })
+    req.end()
 })
 
-req.on('error', error => {
-  console.error(error)
-})
-
-req.end()
-
-}
-)
 
 exports.handler = async (event) => {
 
