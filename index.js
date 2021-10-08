@@ -1,12 +1,5 @@
 
-const https = require('https')
 
-const options =  {
-hostname : 'sodev.anzen.com.mx',
-port: 8237,
-path: '/',
-method: 'GET'
-};
 
 const doRequest = () => new Promise((resolve, reject) => {
     const https = require('https');
